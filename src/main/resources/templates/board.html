@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Board</title>
+</head>
+<body>
+<h1>Practice Board</h1>
+<!--main-->
+
+<form action="/write" method="post">
+
+  <div>
+    <label>Title:</label>
+    <input type="text" name="title" required>
+  </div>
+  <br>
+  <div>
+    <label>Content:</label>
+      <textarea name="content" rows="4" cols="30" required></textarea>
+  </div>
+  <br>
+  <button type="submit">Submit</button>
+</form>
+
+<h2>board content</h2>
+<ul>
+  <li th:each="article  : ${articles}">
+      <strong th:text="${article.title}">title</strong>
+      <span th:text="${article.content}">content</span>
+</ul>
+</body>
+</html>
