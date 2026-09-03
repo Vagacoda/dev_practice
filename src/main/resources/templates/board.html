@@ -8,7 +8,8 @@
 <h1>Practice Board</h1>
 <!--main-->
 
-<form action="/write" method="post">
+<!--enctype은 파일을 서버로 전송하기위해 추가됨-->
+<form action="/write" method="post" enctype="multipart/form-data">
 
   <div>
     <label>Title:</label>
@@ -19,6 +20,13 @@
     <label>Content:</label>
       <textarea name="content" rows="4" cols="30" required></textarea>
   </div>
+    <!--이미지 선택 추가-->
+    <div>
+    <label>Image:</label>
+    <input type="file" name="image" accept="image/*">
+    <!--브라우저에 파일선택 버튼추가와 파일의 이름을 image로 지정 Controller의 image와 연결됨-->
+  </div>
+    <br>
   <br>
   <button type="submit">Submit</button>
 </form>
@@ -28,6 +36,11 @@
   <li th:each="article  : ${articles}">
       <strong th:text="${article.title}">title</strong>
       <span th:text="${article.content}">content</span>
+      <div th:if="${article.imageUrl != null}">
+          <img th:src="${article.imageUrl}"
+               alt="게시글 이미지"
+               style="max-width: 300px; display: block; margin-top: 10px;">
+      </div>
 </ul>
 </body>
 </html>
