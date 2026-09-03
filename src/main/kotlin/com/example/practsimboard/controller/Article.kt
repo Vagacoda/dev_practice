@@ -59,6 +59,7 @@ class ArticleController
 
             // 파일명 중복방지를 위한 UUID생성(ex: 123e4567_image.jpg)
             val fileName = UUID.randomUUID().toString() + "_" + image.originalFilename
+            // 상대파일경로가 아닌 절대파일경로로 지정함
             val saveFile = File(uploadDir, fileName).absoluteFile
 
             //폴더에 물리적으로 파일을 저장함
