@@ -34,10 +34,16 @@
 <h2>Board List</h2>
 <ul>
   <li th:each="article  : ${articles}">
+  <!--article 안에 들어있는 게시글 하나씩 반복 게시글이 세개면 article = 1번게시물, article = 2번 게시물 과 같이 반복-->
       <a th:href="@{/article/{id}(id=${article.id})}">
+      <!--게시글 제목을 클릭했으르 떄 이동할 주소를 생성-->
+      <!--ex: article.id = 5 라면 /article/5 임-->
+      <!--즉, 게시물 제목 클릭 -> /article/5 -> @GetMapping("/article/{id}") -> detail() 실행-->
       <strong th:text="${article.title}">title</strong>
+      <!--게시물 제목을 굵게 표시-->
       </a>
-
+      <!--a 태그는 클릭 가능한 링크가 됨-->
+  </li>
 </ul>
 </body>
 </html>

@@ -41,10 +41,13 @@ class ArticleController
         return "board"
     }
 
+    // 2026/09/04 22:45 추가
     @GetMapping("/article/{id}") // 브라우저에서 /article/숫자 형태로 GET요청이 오면 아래 함수 실행
     fun detail(@PathVariable id: Long, model: Model): String{
         // 주소안의 {id}값을 id 변수로 받아오고 Model객체를  model로 선언
         val article = articleRepository.findById(id).orElseThrow{
+            // articleRepository.findById(id)는 게시글 id를 조회함
+            // orElseThrow는 찾는 id가 없으면 메시지를 내보냄
             IllegalArgumentException("Can't find article")
         }
         model.addAttribute("article", article)
