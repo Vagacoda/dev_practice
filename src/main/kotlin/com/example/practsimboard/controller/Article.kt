@@ -41,13 +41,16 @@ class ArticleController
         return "board"
     }
 
-    @GetMapping("/article/{id}")
+    @GetMapping("/article/{id}") // 브라우저에서 /article/숫자 형태로 GET요청이 오면 아래 함수 실행
     fun detail(@PathVariable id: Long, model: Model): String{
+        // 주소안의 {id}값을 id 변수로 받아오고 Model객체를  model로 선언
         val article = articleRepository.findById(id).orElseThrow{
             IllegalArgumentException("Can't find article")
         }
         model.addAttribute("article", article)
+        // article 데이터를 HTML로 전달
         return "article"
+        // article 화면을 보여줌
     }
 
     // 2. @PostMapping("/write") 로 수정
