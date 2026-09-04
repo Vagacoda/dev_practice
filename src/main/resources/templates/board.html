@@ -31,16 +31,12 @@
   <button type="submit">Submit</button>
 </form>
 
-<h2>board content</h2>
+<h2>Board List</h2>
 <ul>
   <li th:each="article  : ${articles}">
+      <a th:href="@{/article/{id}(id=${article.id})}">
       <strong th:text="${article.title}">title</strong>
-      <span th:text="${article.content}">content</span>
-      <div th:if="${article.imageUrl != null}">
-          <img th:src="${article.imageUrl}"
-               alt="게시글 이미지"
-               style="max-width: 300px; display: block; margin-top: 10px;">
-      </div>
+
 </ul>
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.multipart.MultipartFile
@@ -38,6 +39,15 @@ class ArticleController
         val articles = articleRepository.findAll()
         model.addAttribute("articles", articles)
         return "board"
+    }
+
+    @GetMapping("/article/{id}")
+    fun detail(@PathVariable id: Long, model: Model): String{
+        val article = articleRepository.findById(id).orElseThrow{
+            IllegalArgumentException("Can't find article")
+        }
+        model.addAttribute("article", article)
+        return "article"
     }
 
     // 2. @PostMapping("/write") 로 수정
