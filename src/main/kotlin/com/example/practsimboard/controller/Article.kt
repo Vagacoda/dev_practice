@@ -56,6 +56,17 @@ class ArticleController
         // article 화면을 보여줌
     }
 
+    // 2026/09/05 22:22 추가
+    // 게시글 수정창 추가
+    @GetMapping("/article/{id}/edit")
+    fun editform(@PathVariable id: Long, model: Model): String {
+        var article = articleRepository.findById(id).orElseThrow{
+            IllegalArgumentException("Can't find article")
+        }
+        model.addAttribute("article", article)
+        return "article"
+    }
+
     // 2. @PostMapping("/write") 로 수정
     @PostMapping("/write")
     fun write(
@@ -89,6 +100,31 @@ class ArticleController
             imageUrl = imageUrl
         )
         articleRepository.save(article)
+        return "redirect:/"
+        }
+    // 2026/09/05 22:26 추가
+    // 게시글 수정창
+    @PostMapping("/article/{id}/edit")
+    fun edit(
+        @PathVariable id: Long,
+        @RequestParam title: String,
+        @RequestParam content: String
+    ): String {
+        val article = articleRepository.findById(id).orElseThrow {
+            IllegalArgumentException("Can't find article")
+        }
+        article.title = title
+        article.content = content
+        articleRepository.save(article)
+
+        return "redirect:/"
+    }
+    @PostMapping("article/{id}/delete")
+    fun delete(@PathVariable id: Long): String{
+        val article = articleRepository.findById(id).orElseThrow{
+            IllegalArgumentException("Can't find article")
+        }
+        articleRepository.delete(article)
         return "redirect:/"
     }
 }
