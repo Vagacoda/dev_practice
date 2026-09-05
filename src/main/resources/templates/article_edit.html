@@ -9,18 +9,29 @@
         th:action="@{/article/{id}/edit(id=${article.id})}"
         method="post"
     >
+    <!--클릭 가능한 링크를 만드는 태그 th:href는 타임리프가 링크주소를 만들어주는 기능 ${article.id}는 현재 게시글 id-->
         <input
             type="text"
             name="title"
             th:value="${article.title}"
             required
         >
+        <!--type="text"는 한 줄 텍스트 입력칸-->
+        <!--name="title"서버엣거 @RequestParam로 받기 위한 이름-->
+        <!--th:value="${article.title}"은 기존 제목을 입력칸에 미리 표시-->
+        <!--required: 제목 없이 저장 버튼을 누르면 브라우저가 전송을 막음-->
         <textarea
             name="content"
             th:text="${article.content}"
             required
             ></textarea>
+        <!-- <textarea>는 여러 줄의 글을 작성하는 입력칸 -->
+        <!--name="content"는 컨트롤러의 @RequestParam content와 연결-->
+        <!--th:text="${article.content}"는 기존 내용을 미리 표시-->
+        <!--required: 내용 없이 저장 버튼을 누르면 브라우저가 전송을 막음-->
         <button type="submit">Save</button>
+        <!--type="submit"은 폼 안의 값을 th:action 주소로 보냄-->
+        <!--클릭하면 수정 저장 컨트롤러가 실행-->
     </form>
 </body>
 </html>

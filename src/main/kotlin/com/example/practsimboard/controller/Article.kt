@@ -106,19 +106,21 @@ class ArticleController
     // 게시글 수정창
     @PostMapping("/article/{id}/edit")
     fun edit(
-        @PathVariable id: Long,
-        @RequestParam title: String,
-        @RequestParam content: String
+        @PathVariable id: Long, //게시글 번호
+        @RequestParam title: String, // HTML의 name='title'입력값 받음
+        @RequestParam content: String //HTML의 name="content"입력값 받음
+        // 실제 수정 저장을 담당하는 함수임
     ): String {
-        val article = articleRepository.findById(id).orElseThrow {
+        val article = articleRepository.findById(id).orElseThrow { //수정할 기존 게시글을 데이터 베이스에서 찾음
             IllegalArgumentException("Can't find article")
         }
-        article.title = title
-        article.content = content
-        articleRepository.save(article)
+        article.title = title // 기존의 제목을 새로 입력한 title로 바꿈
+        article.content = content // 기존의 내용을 새로 입력한 content로 바꿈
+        articleRepository.save(article) // 바꿈 article을 데이터 베이스에 저장함
 
-        return "redirect:/"
+        return "redirect:/article/\$id" // 저장이 끝나면 상세 페이지로 이동
     }
+    // 게시글 삭제
     @PostMapping("article/{id}/delete")
     fun delete(@PathVariable id: Long): String{
         val article = articleRepository.findById(id).orElseThrow{
