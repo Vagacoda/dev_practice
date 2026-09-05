@@ -26,5 +26,19 @@
     <hr>
     <a href="/">back to home</a>
     <!--"/"주소로 이동하는 링크임-->
+
+    <!--2026/09/05 22:53 추가-->
+    <!--수정, 삭제-->
+    <a th:href="@{/article/{id}/edit(id=${article.id})}">Article Edit</a>
+    <form
+        th:action="@{/article/{id}/delete(id=${article.id})}"
+        method="post"
+        style="display:inline;"
+    >
+        <button type="submit">Delete</button>
+    </form>
+    <a th:href="@{/article/{id}/edit(id=${article.id})}">
+        Edit
+    </a>
 </body>
 </html>

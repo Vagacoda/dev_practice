@@ -64,7 +64,7 @@ class ArticleController
             IllegalArgumentException("Can't find article")
         }
         model.addAttribute("article", article)
-        return "article"
+        return "article_edit"
     }
 
     // 2. @PostMapping("/write") 로 수정
