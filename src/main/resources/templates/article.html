@@ -38,5 +38,21 @@
         <button type="submit">Delete</button>
     </form>
 
+    <!--2026/09/06 23:00 추가-->
+    <form
+            th:action="@{/article/{id}/delete(id=${article.id})}"
+            method="post"
+            style="display:inline;"
+    >
+        <button
+                type="submit"
+                onclick="return confirm('정말 이 게시글을 삭제할까요?');"
+        >
+            Delete
+        </button>
+    </form>
+    <!--
+        delete 클릭시 You sure delete? 출력 확인 클릭시 삭제 취소 시 삭제X
+    -->
 </body>
 </html>
