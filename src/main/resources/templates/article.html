@@ -44,12 +44,18 @@
             method="post"
             style="display:inline;"
     >
+        <!--삭제 요청을 보내는 주소를 만들며, post방식, 폼이 한 줄을 전부 차지 않도록 설정
+        {id에는 현재 게시글 id가 들어감. ex: /article/3/delete }-->
         <button
                 type="submit"
                 onclick="return confirm('Sure Delete?');"
         >
             Delete
         </button>
+        <!--submit할 시 form안의 내용을 서버로 전송, 삭제주소로 POST요청 전송됨
+        delete버튼 클릭시 확인창을 띄움 confirm은 확인/취소 버튼이 있는 팝업창임
+        확인을 누르면 true반환되어 삭제 요청 진행, 취소 누르면 false반환되어 삭제요청 취소
+        return은 confirm결과를 버튼 동작에 적용한다는 뜻임.-->
     </form>
     <!--
         delete 클릭시 You sure delete? 출력 확인 클릭시 삭제 취소 시 삭제X
