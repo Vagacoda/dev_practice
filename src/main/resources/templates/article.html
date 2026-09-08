@@ -10,6 +10,7 @@
 
     <!--제목 출력-->
     <h2 th:text="${article.title}">Title</h2>
+    <span>조회수: <span th:text="${article.viewCount}"></span></span>
     <!--내용 출력-->
     <p th:text="${article.content}">Content</p>
 
