@@ -23,7 +23,10 @@ class Article
     var title: String,
     var content: String,
     // 2026/09/03 22:02 추가
-    var imageUrl: String? = null
+    var imageUrl: String? = null,
+    // 2026/09/08 21:32 추가
+    // 조회수 기능 추가
+    var viewCount: Int = 0
 )
 
 interface ArticleRepository : JpaRepository<Article, Long>
@@ -52,6 +55,12 @@ class ArticleController
         }
         model.addAttribute("article", article)
         // article 데이터를 HTML로 전달
+
+        // 2026/09/08 21:33 추가
+        // 조회수 기능임
+        article.viewCount++
+        articleRepository.save(article)
+
         return "article"
         // article 화면을 보여줌
     }
