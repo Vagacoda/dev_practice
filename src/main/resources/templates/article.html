@@ -10,6 +10,8 @@
 
     <!--제목 출력-->
     <h2 th:text="${article.title}">Title</h2>
+    <!--2026/09.08 - 21:40 추가-->
+    <!--조회수 기능 추가-->
     <span>조회수: <span th:text="${article.viewCount}"></span></span>
     <!--내용 출력-->
     <p th:text="${article.content}">Content</p>
