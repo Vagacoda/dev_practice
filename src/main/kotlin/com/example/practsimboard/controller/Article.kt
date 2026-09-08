@@ -53,13 +53,14 @@ class ArticleController
             // orElseThrow는 찾는 id가 없으면 메시지를 내보냄
             IllegalArgumentException("Can't find article")
         }
-        model.addAttribute("article", article)
-        // article 데이터를 HTML로 전달
 
         // 2026/09/08 21:33 추가
         // 조회수 기능임
         article.viewCount++
         articleRepository.save(article)
+
+        model.addAttribute("article", article)
+        // article 데이터를 HTML로 전달
 
         return "article"
         // article 화면을 보여줌
