@@ -29,12 +29,11 @@ class Article
     var viewCount: Int = 0
 )
 
-interface ArticleRepository : JpaRepository<Article, Long>
-
 // 2026/09/12 17:16 게시글 검색 기능 추가.
-interface ArticlRepository : JpaRepository<Article, Long>{
+interface ArticleRepository : JpaRepository<Article, Long>{
     fun findByTitleContains(Keyword: String): List<Article>
 }
+
 
 @Controller
 class ArticleController
@@ -80,6 +79,11 @@ class ArticleController
         }
         model.addAttribute("article", article)
         return "article_edit"
+    }
+
+    @GetMapping("/search")
+    fun search(@RequestParam keyword: String, model: Model): String {
+        val articles = articleRepository.findByTitleContatining(keyword)
     }
 
     // 2. @PostMapping("/write") 로 수정
