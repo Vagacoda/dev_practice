@@ -88,7 +88,7 @@ class ArticleController
 
         model.addAttribute("articles", articles)
 
-        return "/search"
+        return "board"
     }
 
     // 2. @PostMapping("/write") 로 수정
