@@ -31,6 +31,11 @@ class Article
 
 interface ArticleRepository : JpaRepository<Article, Long>
 
+// 2026/09/12 17:16 게시글 검색 기능 추가.
+interface ArticlRepository : JpaRepository<Article, Long>{
+    fun findByTitleContains(Keyword: String): List<Article>
+}
+
 @Controller
 class ArticleController
     (
