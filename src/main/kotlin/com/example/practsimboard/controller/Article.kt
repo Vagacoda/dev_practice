@@ -83,7 +83,11 @@ class ArticleController
 
     @GetMapping("/search")
     fun search(@RequestParam keyword: String, model: Model): String {
-        val articles = articleRepository.findByTitleContatining(keyword)
+        val articles = articleRepository.findByTitleContains(keyword)
+
+        model.addAttribute("articles", articles)
+
+        return "search"
     }
 
     // 2. @PostMapping("/write") 로 수정
