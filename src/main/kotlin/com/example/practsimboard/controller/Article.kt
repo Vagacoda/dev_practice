@@ -31,7 +31,7 @@ class Article
 
 // 2026/09/12 17:16 게시글 검색 기능 추가.
 interface ArticleRepository : JpaRepository<Article, Long>{
-    fun findByTitleContains(Keyword: String): List<Article>
+    fun findByTitleContains(keyword: String): List<Article>
 }
 
 
@@ -81,6 +81,7 @@ class ArticleController
         return "article_edit"
     }
 
+    // 2026//09/12 17:25 게시글 검색 추가
     @GetMapping("/search")
     fun search(@RequestParam keyword: String, model: Model): String {
         val articles = articleRepository.findByTitleContains(keyword)
