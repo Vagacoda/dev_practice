@@ -37,12 +37,15 @@ class Comment(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id : Long? = null,
+    // 댓글 id
 
     var content: String,
+    // 댓글 내용
 
     @ManyToOne
     @JoinColumn(name="article_id")
     var article : Article
+    // 댓글 여러개가 게시물 하나에 가능
 )
 
 // 2026/09/12 17:16 게시글 검색 기능 추가.
@@ -86,10 +89,12 @@ class ArticleController
 
         // 2026/09/13 22:26 댓글 기능 추가
         val comments = commentRepository.findByArticleId(id)
+        // 댓글 주소 findByArticle(5)
 
         model.addAttribute("article", article)
         model.addAttribute("comments", comments)
         // article 데이터를 HTML로 전달
+        // comment 데이터를 HTML로 전달
 
         return "article"
         // article 화면을 보여줌
@@ -182,16 +187,16 @@ class ArticleController
     // 2026/09/13 22:27 댓글 기능 추가
     @PostMapping("/article/{id}/comment")
     fun writeComment(
-        @PathVariable id: Long,
-        @RequestParam content: String
+        @PathVariable id: Long, // article(5)에서
+        @RequestParam content: String // html의 content내용을 가져옴
     ):String {
         val article = articleRepository.findById(id).orElseThrow{
             IllegalArgumentException("Can't find article")
         }
 
-        val comment = Comment(
-            content = content,
-            article = article
+        val comment = Comment( // 댓글 객체임
+            content = content, // test commnet
+            article = article // 5번 게시글
         )
 
         commentRepository.save(comment)
