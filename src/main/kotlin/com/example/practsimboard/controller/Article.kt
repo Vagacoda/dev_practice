@@ -88,6 +88,7 @@ class ArticleController
         val comments = commentRepository.findByArticleId(id)
 
         model.addAttribute("article", article)
+        model.addAttribute("comments", comments)
         // article 데이터를 HTML로 전달
 
         return "article"
