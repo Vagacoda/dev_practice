@@ -4,6 +4,8 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.ManyToOne
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -29,16 +31,35 @@ class Article
     var viewCount: Int = 0
 )
 
+// 2026/09/13 22:16 댓글 기능 추가
+@Entity
+class Comment(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id : Long? = null,
+
+    var content: String,
+
+    @ManyToOne
+    @JoinColumn(name="article_id")
+    var article : Article
+)
+
 // 2026/09/12 17:16 게시글 검색 기능 추가.
 interface ArticleRepository : JpaRepository<Article, Long>{
     fun findByTitleContains(keyword: String): List<Article>
 }
 
+interface CommentRepository : JpaRepository<Comment, Long> {
+    fun findByArticleId(articleId: Long): List<Comment>
+}
+// Comment중에서 article.id가 특정 값(ex: commentRepository.findByArticleId(5))인 comment만 찾음
 
 @Controller
 class ArticleController
     (
-    private val articleRepository: ArticleRepository
+    private val articleRepository: ArticleRepository,
+    private val commentRepository: CommentRepository
 ) {
     // 1. @GetMapping("/") 로 수정
     @GetMapping("/")
