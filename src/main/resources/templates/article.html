@@ -65,5 +65,17 @@
     <!--
         delete 클릭시 You sure delete? 출력 확인 클릭시 삭제 취소 시 삭제X
     -->
+    <h3>Comments</h3>
+
+    <form th:action="@{/article/{id}/comment(id=${article.id})}" method="post">
+        <textarea name="content" required></textarea>
+        <button type="submit">Comment</button>
+    </form>
+
+    <ul>
+        <li th:each="comment : ${comments}">
+            <span th:text="${comment.content}"></span>
+        </li>
+    </ul>
 </body>
 </html>
