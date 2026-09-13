@@ -84,6 +84,9 @@ class ArticleController
         article.viewCount++
         articleRepository.save(article)
 
+        // 2026/09/13 22:26 댓글 기능 추가
+        val comments = commentRepository.findByArticleId(id)
+
         model.addAttribute("article", article)
         // article 데이터를 HTML로 전달
 
@@ -173,5 +176,25 @@ class ArticleController
         }
         articleRepository.delete(article)
         return "redirect:/"
+    }
+
+    // 2026/09/13 22:27 댓글 기능 추가
+    @PostMapping("/article/{id}/comment")
+    fun writeComment(
+        @PathVariable id: Long,
+        @RequestParam content: String
+    ):String {
+        val article = articleRepository.findById(id).orElseThrow{
+            IllegalArgumentException("Can't find article")
+        }
+
+        val comment = Comment(
+            content = content,
+            article = article
+        )
+
+        commentRepository.save(comment)
+
+        return "redirect:/article/$id"
     }
 }
