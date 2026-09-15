@@ -205,7 +205,7 @@ class ArticleController
     }
 
     // 2026/09/15 20:54 댓글 삭제 기능 추가
-    @PostMapping("/article/{id}/commnet/{commentId}/delete")
+    @PostMapping("/article/{articleId}/comment/{commentId}/delete")
     fun deleteComment(
         @PathVariable articleId: Long,
         @PathVariable commentId: Long): String{
