@@ -80,6 +80,27 @@
         </li>
         <!--comment 내용 하나씩 반복하여 꺼낸뒤 comment이름으로 사용-->
     </ul>
+    <!--2026/09/15 - 21:44 댓글 삭제 기능 추가-->
+    <ul>
+        <li th:each="comment : ${comments}">
+            <span th:text="${comment.content}">Comment content</span>
 
+            <form
+                    th:action="@{/article/{articleId}/comment/{commentId}/delete(
+                articleId=${article.id},
+                commentId=${comment.id}
+            )}"
+                    method="post"
+                    style="display:inline;"
+            >
+                <button
+                        type="submit"
+                        onclick="return confirm('Sure Delete Comment?');"
+                >
+                    Delete
+                </button>
+            </form>
+        </li>
+    </ul>
 </body>
 </html>
