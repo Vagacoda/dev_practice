@@ -172,7 +172,7 @@ class ArticleController
         article.content = content // 기존의 내용을 새로 입력한 content로 바꿈
         articleRepository.save(article) // 바꿈 article을 데이터 베이스에 저장함
 
-        return "redirect:/article/\$id" // 저장이 끝나면 상세 페이지로 이동
+        return "redirect:/article/$id" // 저장이 끝나면 상세 페이지로 이동
     }
     // 게시글 삭제
     @PostMapping("article/{id}/delete")
@@ -202,5 +202,23 @@ class ArticleController
         commentRepository.save(comment)
 
         return "redirect:/article/$id"
+    }
+
+    // 2026/09/15 20:54 댓글 삭제 기능 추가
+    @PostMapping("/article/{id}/commnet/{commentId}/delete")
+    fun deleteComment(
+        @PathVariable articleId: Long,
+        @PathVariable commentId: Long): String{
+        val comment = commentRepository.findById(commentId).orElseThrow {
+            IllegalArgumentException("Can't find Comment")
+        }
+
+        if (comment.article.id != articleId) {
+            throw IllegalArgumentException("Can't delete Article")
+        }
+
+        commentRepository.delete(comment)
+
+        return "redirect:/article/$articleId"
     }
 }
