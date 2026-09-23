@@ -18,3 +18,5 @@ class Webconfig : WebMvcConfigurer { // WebMvcConfigurer를 상속해서 Spring 
             // 예를 들어 uploads/cat.jpg 를 요청하면 uploads/cat.jpg를 찾을 것임 (실제 파일 위치)
     }
 }
+
+// 추후 다른 config도 올려볼 예정
