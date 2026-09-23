@@ -67,7 +67,11 @@
     -->
 
     <!--2026/09/13 - 22:30 댓글 기능 추가-->
-    <h3>Comments</h3>
+    <h3>
+        Comments (
+        <span th:text="${#lists.size(comments)}">0</span>
+        )
+    </h3>
 
     <form th:action="@{/article/{id}/comment(id=${article.id})}" method="post">
         <textarea name="content" required></textarea>
