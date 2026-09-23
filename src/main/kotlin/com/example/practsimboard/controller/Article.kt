@@ -50,6 +50,8 @@ class Comment(
 
 // 2026/09/12 17:16 게시글 검색 기능 추가.
 // 레파지토리(Repository)는 DB조회와 수정, 삭제하는 도구
+// 현재는 하나의 소스파일에서 엔터티, 서비스, 컨트롤러를 작성하였지만
+// 하나의 소스파일에서 모두 작성하면 굉장히 비 효율적인 코드가 됨.
 interface ArticleRepository : JpaRepository<Article, Long>{
     fun findByTitleContains(keyword: String): List<Article>
 }
