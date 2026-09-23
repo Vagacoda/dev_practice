@@ -74,7 +74,13 @@
     </h3>
 
     <form th:action="@{/article/{id}/comment(id=${article.id})}" method="post">
-        <textarea name="content" required></textarea>
+        <textarea
+                name="content"
+                required
+                minlength="1"
+                maxlength="200"
+                placeholder="댓글을 입력하세요."
+        ></textarea>
         <button type="submit">Comment</button>
     </form>
 <!--    <ul>-->
