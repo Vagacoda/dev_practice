@@ -197,6 +197,10 @@ class ArticleController
             IllegalArgumentException("Can't find article")
         }
 
+        if (content.isBlank()) {
+            return "redirect:/article/$id"
+        }
+
         val comment = Comment( // 댓글 객체임
             content = content, // test commnet
             article = article // 5번 게시글
