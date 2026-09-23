@@ -49,6 +49,7 @@ class Comment(
 )
 
 // 2026/09/12 17:16 게시글 검색 기능 추가.
+// 레파지토리(Repository)는 DB조회와 수정, 삭제하는 도구
 interface ArticleRepository : JpaRepository<Article, Long>{
     fun findByTitleContains(keyword: String): List<Article>
 }
