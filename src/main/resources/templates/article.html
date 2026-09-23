@@ -81,6 +81,9 @@
 <!--    </ul>-->
 <!--2026/09/15 - 22:00 기존 댓글 기능과 통합-->
     <!--2026/09/15 - 21:44 댓글 삭제 기능 추가-->
+    <p th:if="${#lists.isEmpty(comments)}">
+        아직 작성된 댓글이 없습니다.
+    </p>
     <ul>
         <li th:each="comment : ${comments}">
             <span th:text="${comment.content}">Comment content</span>
