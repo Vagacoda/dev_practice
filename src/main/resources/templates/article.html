@@ -97,6 +97,13 @@
     <ul>
         <li th:each="comment : ${comments}">
             <span th:text="${comment.content}">Comment content</span>
+                <a
+                        th:href="@{/article/{articleId}/comment/{commentId}/edit(
+                        articleId=${article.id},
+                        commentId=${comment.id}
+                    )}"
+                >Edit
+                </a>
 
             <form
                     th:action="@{/article/{articleId}/comment/{commentId}/delete(
