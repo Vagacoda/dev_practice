@@ -256,4 +256,7 @@ class ArticleController
 
         return "redirect:/article/$articleId"
     }
+
+    // 2026/09/29 - comment edit
+    @PostMapping("/article/{articleId}/comment/{commentId}/edit")
 }
