@@ -256,5 +256,39 @@ class ArticleController
 
         return "redirect:/article/$articleId"
     }
+    // 2026/09/29 - comment edit
+    @PostMapping("/article/{articleId}/comment/{commentId}/edit")
+    fun editComment(
+        @PathVariable articleId: Long,
+        @PathVariable commentId: Long,
+        @RequestParam content: String
+    ): String {
+        val comment = commentRepository.findById(commentId).orElseThrow {
+            IllegalArgumentException("Can't find comment")
+        }
 
+        if (comment.article.id != articleId) {
+            throw IllegalArgumentException(
+                "Comment does not belong to this article"
+            )
+        }
+
+        if (content.isBlank()) {
+            return "redirect:/article/$articleId"
+        }
+
+        comment.content = content
+        commentRepository.save(comment)
+
+        return "redirect:/article/$articleId"
+    }
+    // 댓글 Edit 클릭
+    //→ 수정 화면 표시
+    //→ 기존 댓글 내용 수정
+    //→ Save 클릭
+    //→ POST 요청
+    //→ 댓글 존재 여부 및 게시글 관계 확인
+    //→ comment.content 변경
+    //→ DB 저장
+    //→ 원래 게시글 상세 페이지로 이동
 }
