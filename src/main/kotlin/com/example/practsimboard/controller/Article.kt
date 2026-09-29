@@ -283,4 +283,13 @@ class ArticleController
 
         return "redirect:/article/$articleId"
     }
+    // 댓글 Edit 클릭
+    //→ 수정 화면 표시
+    //→ 기존 댓글 내용 수정
+    //→ Save 클릭
+    //→ POST 요청
+    //→ 댓글 존재 여부 및 게시글 관계 확인
+    //→ comment.content 변경
+    //→ DB 저장
+    //→ 원래 게시글 상세 페이지로 이동
 }
