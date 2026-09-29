@@ -259,4 +259,28 @@ class ArticleController
 
     // 2026/09/29 - comment edit
     @PostMapping("/article/{articleId}/comment/{commentId}/edit")
+    fun editComment(
+        @PathVariable articleId: Long,
+        @PathVariable commentId: Long,
+        @RequestParam content: String
+    ): String {
+        val comment = commentRepository.findById(commentId).orElseThrow {
+            IllegalArgumentException("Can't find comment")
+        }
+
+        if (comment.article.id != articleId) {
+            throw IllegalArgumentException(
+                "Comment does not belong to this article"
+            )
+        }
+
+        if (content.isBlank()) {
+            return "redirect:/article/$articleId"
+        }
+
+        comment.content = content
+        commentRepository.save(comment)
+
+        return "redirect:/article/$articleId"
+    }
 }
