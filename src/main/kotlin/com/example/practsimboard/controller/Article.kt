@@ -124,6 +124,33 @@ class ArticleController
         return "board"
     }
 
+    // 2026/09/29 - comment edit 기능 추가
+    @GetMapping("/article/{articleId}/comment/{commentId}/edit")
+    fun commentEditForm(
+        @PathVariable articleId: Long,
+        @PathVariable commentId: Long,
+        model: Model
+    ): String {
+        val comment = commentRepository.findById(commentId).orElseThrow {
+            IllegalArgumentException("Can't find comment")
+        }
+
+        if (comment.article.id != articleId) {
+            throw IllegalArgumentException(
+                "Comment does not belong to this article"
+            )
+        }
+
+        model.addAttribute("articleId", articleId)
+        model.addAttribute("comment", comment)
+
+        return "comment_edit"
+    }
+    //Edit 클릭
+    //→ GET /article/5/comment/12/edit
+    //→ 12번 댓글 조회
+    //→ 실제로 5번 게시글의 댓글인지 확인
+    //→ comment_edit.html 표시
 
 
     // 2. @PostMapping("/write") 로 수정
