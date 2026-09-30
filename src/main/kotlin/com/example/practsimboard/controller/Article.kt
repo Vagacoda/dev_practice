@@ -81,7 +81,7 @@ class ArticleController
     // 1. @GetMapping("/") 로 수정
     @GetMapping("/")
     fun index(model: Model): String {
-        val articles = articleRepository.findAll()
+        val articles = articleRepository.findAllByOrderByIdDesc()
         model.addAttribute("articles", articles)
         return "board"
     }
