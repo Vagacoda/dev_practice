@@ -1,11 +1,13 @@
 package com.example.practsimboard.controller
 
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToMany
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -47,6 +49,12 @@ class Comment(
     var article : Article
     // 댓글 여러개가 게시물 하나에 가능
 )
+@OneToMany(
+    mappedBy = "article",
+    cascade = [CascadeType.REMOVE],
+    orphanRemoval = true
+)
+var comments: MutableList<Comment> = mutableListOf()
 
 // 2026/09/12 17:16 게시글 검색 기능 추가.
 // 레파지토리(Repository)는 DB조회와 수정, 삭제하는 도구
