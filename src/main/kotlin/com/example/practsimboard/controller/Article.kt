@@ -128,8 +128,8 @@ class ArticleController
     // 2026//09/12 17:25 게시글 검색 추가
     @GetMapping("/search")
     fun search(@RequestParam keyword: String, model: Model): String {
-        val articles = articleRepository
-            .findByTitleContainsOrderByIdDesc(keyword
+        val articles =
+            articleRepository.findByTitleContainsOrderByIdDesc(keyword)
 
         model.addAttribute("articles", articles)
 
