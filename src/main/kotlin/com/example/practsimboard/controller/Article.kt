@@ -31,7 +31,14 @@ class Article
     // 2026/09/08 21:32 추가
     // 조회수 기능 추가
     var viewCount: Int = 0
-)
+){
+    @OneToMany(
+        mappedBy = "article",
+        cascade = [CascadeType.REMOVE],
+        orphanRemoval = true
+    )
+    var comments: MutableList<Comment> = mutableListOf()
+}
 
 // 2026/09/13 22:16 댓글 기능 추가
 @Entity
@@ -49,12 +56,6 @@ class Comment(
     var article : Article
     // 댓글 여러개가 게시물 하나에 가능
 )
-@OneToMany(
-    mappedBy = "article",
-    cascade = [CascadeType.REMOVE],
-    orphanRemoval = true
-)
-var comments: MutableList<Comment> = mutableListOf()
 
 // 2026/09/12 17:16 게시글 검색 기능 추가.
 // 레파지토리(Repository)는 DB조회와 수정, 삭제하는 도구
